@@ -2,11 +2,11 @@
 name = "rsomics-igzip"
 version = "0.1.0"
 description = "Minimal Quadrant-② FFI wrapper over Intel ISA-L igzip for fast gzip decompression. Isolated unsafe surface; all consumers stay 100% safe."
-edition.workspace = true
-rust-version.workspace = true
-license.workspace = true
-repository.workspace = true
-authors.workspace = true
+edition = "2024"
+rust-version = "1.91"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/omics-rust/rsomics-world"
+authors = ["Zane Leong <efd@live.com>"]
 categories = ["science"]
 keywords = ["gzip", "igzip", "isa-l", "decompression", "bioinformatics"]
 readme = "README.md"
@@ -31,5 +31,5 @@ isal-sys = "0.5.3"
 
 [dev-dependencies]
 # flate2/zlib-rs: pure-Rust reference decompressor for round-trip correctness tests.
-flate2 = { workspace = true }
+flate2 = { version = "1", default-features = false, features = ["zlib-rs"] }
 tempfile = "3"
