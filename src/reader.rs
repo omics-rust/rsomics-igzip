@@ -19,7 +19,6 @@ const IGZIP_IN: usize = 1 << 22;
 #[cfg(target_os = "linux")]
 const FQ_BUF: usize = 1 << 23;
 
-// ── non-Linux stub ────────────────────────────────────────────────────────────
 // ISA-L's aarch64 asm does not assemble under Apple's integrated assembler,
 // so the isal-sys dep is linux-only.  This stub makes the crate compile
 // everywhere while loudly refusing to construct a reader off Linux.
@@ -43,8 +42,6 @@ impl Read for GzReader {
         unreachable!("rsomics-igzip GzReader cannot be constructed off Linux")
     }
 }
-
-// ── Linux / ISA-L implementation ──────────────────────────────────────────────
 
 #[cfg(target_os = "linux")]
 pub struct GzReader {
