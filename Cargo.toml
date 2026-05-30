@@ -1,7 +1,7 @@
 [package]
 name = "rsomics-igzip"
 version = "0.1.0"
-description = "Minimal Quadrant-② FFI wrapper over Intel ISA-L igzip for fast gzip decompression. Isolated unsafe surface; all consumers stay 100% safe."
+description = "Minimal FFI wrapper over Intel ISA-L igzip for fast gzip decompression. Isolated unsafe surface; all consumers stay 100% safe."
 edition = "2024"
 rust-version = "1.91"
 license = "MIT OR Apache-2.0"
@@ -11,19 +11,18 @@ categories = ["science"]
 keywords = ["gzip", "igzip", "isa-l", "decompression", "bioinformatics"]
 readme = "README.md"
 
-# This crate is the constitution-sanctioned Quadrant-② FFI isolation crate
-# (see CLAUDE.md §Architecture and §External dependency 4-quadrant classification).
-# It intentionally OMITS `[lints] workspace = true` so that `unsafe_code = "forbid"`
-# from the workspace does NOT apply here — this is the single place in the workspace
-# where audited unsafe is permitted.  Every consumer (rsomics-seqio, fastq-*) stays
-# 100% safe and keeps `[lints] workspace = true`.
+# This is the FFI isolation crate for ISA-L igzip. It intentionally OMITS
+# `[lints] workspace = true` so that `unsafe_code = "forbid"` from the workspace
+# does NOT apply here — this is the single place where audited unsafe is permitted.
+# Every consumer (rsomics-seqio, fastq-*) stays 100% safe and keeps
+# `[lints] workspace = true`.
 [lints.rust]
 unsafe_code = "allow"
 
 [dependencies]
 
 # isal-sys 0.5.3: raw bindgen bindings to Intel ISA-L igzip (BSD-2-Clause).
-# Quadrant ②: FFI wrapper — build.rs compiles ISA-L C + asm via cc/nasm.
+# FFI wrapper — build.rs compiles ISA-L C + asm via cc/nasm.
 # Linux-only: ISA-L's aarch64 assembly does not assemble under Apple's
 # integrated assembler. Off Linux this crate compiles to a loud stub.
 [target.'cfg(target_os = "linux")'.dependencies]
